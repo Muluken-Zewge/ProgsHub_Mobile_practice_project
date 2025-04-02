@@ -1,0 +1,32 @@
+import 'package:progshub_practice_project/features/productListing/domain/entities/product_entity.dart';
+
+class ProductModel extends Product {
+  const ProductModel({
+    required super.id,
+    required super.title,
+    required super.price,
+    required super.description,
+    required super.catagory,
+    required super.imgUlr,
+  });
+
+  factory ProductModel.fromJson(Map<String, dynamic> json) {
+    return ProductModel(
+      id: json['id'] is int ? json['id'] as int : 0,
+      title: json['title'] is String ? json["title"] as String : 'No title',
+      price: json['price'] is String ? json['price'] as double : 0.0,
+      description:
+          json['description'] is String
+              ? json['description'] as String
+              : 'No description',
+      catagory:
+          json['catagory'] is String
+              ? json['catagory'] as String
+              : 'Uncatagorized',
+      imgUlr:
+          json['imgUlr'] is String
+              ? json['imgUlr'] as String
+              : 'https://previews.123rf.com/images/dolphfyn/dolphfyn1804/dolphfyn180400032/99608962-creative-product-word-cut-from-paper-isolated-on-white-background.jpg',
+    );
+  }
+}
