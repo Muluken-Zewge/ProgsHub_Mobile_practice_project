@@ -29,4 +29,15 @@ class ProductModel extends Product {
               : 'https://previews.123rf.com/images/dolphfyn/dolphfyn1804/dolphfyn180400032/99608962-creative-product-word-cut-from-paper-isolated-on-white-background.jpg',
     );
   }
+
+  Product toEntity() {
+    return Product(
+      id: id,
+      title: title,
+      price: price,
+      description: description,
+      catagory: catagory,
+      imgUlr: imgUlr,
+    );
+  }
 }
