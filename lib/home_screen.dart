@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () {},
             icon: Icon(Icons.favorite, color: Colors.red),
           ),
-          IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart)),
+          IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart_rounded)),
         ],
       ),
       body: BlocBuilder<ProductBloc, ProductState>(
@@ -49,10 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
               itemCount: state.products.length,
               itemBuilder: (context, index) {
                 final product = state.products[index];
-                return InkWell(
-                  onTap: () {},
-                  child: ProductCardWidget(product: product),
-                );
+                return ProductCardWidget(product: product);
               },
             );
           } else {
