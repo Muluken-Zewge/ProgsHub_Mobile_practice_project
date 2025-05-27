@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:progshub_practice_project/features/cart/bloc/cart_bloc.dart';
+import 'package:progshub_practice_project/features/cart/model/cart_model.dart';
 import 'package:progshub_practice_project/features/productListing/domain/entities/product_entity.dart';
 import 'package:progshub_practice_project/features/productListing/presentation/Screens/product_detail_screen.dart';
 
@@ -66,7 +69,7 @@ class ProductCardWidget extends StatelessWidget {
                           ],
                         ),
                         Text(
-                          '${product.price} Birr',
+                          '${product.price} USD',
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.green,
@@ -81,9 +84,40 @@ class ProductCardWidget extends StatelessWidget {
                           onPressed: () {},
                           icon: Icon(Icons.favorite_border),
                         ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.shopping_cart_outlined),
+                        BlocBuilder<CartBloc, CartState>(
+                          builder: (context, state) {
+                            final cart =
+                                (state is CartUpdatedState) ? state.cart : [];
+
+                            final isInCart = cart.any(
+                              (item) => item.product.id == product.id,
+                            );
+                            return IconButton(
+                              onPressed:
+                                  isInCart
+                                      ? () {
+                                        context.read<CartBloc>().add(
+                                          RemoveFromCartEvent(
+                                            product: product,
+                                            quantity: 1,
+                                          ),
+                                        );
+                                      }
+                                      : () {
+                                        context.read<CartBloc>().add(
+                                          AddToCartEvent(
+                                            product: product,
+                                            quantity: 1,
+                                          ),
+                                        );
+                                      },
+                              icon: Icon(
+                                isInCart
+                                    ? Icons.shopping_cart
+                                    : Icons.shopping_cart_outlined,
+                              ),
+                            );
+                          },
                         ),
                       ],
                     ),

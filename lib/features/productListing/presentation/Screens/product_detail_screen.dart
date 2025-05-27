@@ -44,7 +44,7 @@ class ProductDetailScreen extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        'Price: ${product.price} Birr',
+                        'Price: ${product.price} USD',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
